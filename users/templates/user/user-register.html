@@ -1,0 +1,31 @@
+<html>
+    <head>
+    <title>Criar Usuario</title>
+    </head>
+    <body>
+        <form action="{% url 'user:user_create' %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+
+                <label for='{{field.id_field}}'>{{field.label}}</label>    
+                {{field}}
+            
+                {% if field.help_text%}
+                    <p>{{field.help_text}}</p>
+                {% endif %}
+
+            {% endfor %}
+            {{form.errors}}
+            {% for message in messages %}
+        <div {% if message.tags %} class="alert {{ message.tags }} text-center" role="alert" {% endif %}>
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+            <button type='submit'>Send</button>
+        </form>
+    
+    </body>
+</html>

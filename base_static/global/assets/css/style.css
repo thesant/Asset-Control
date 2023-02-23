@@ -1,0 +1,52 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Open Sans";
+}
+
+
+
+html,body{
+	height: 100%;
+	background: rgb(225,225,225);
+}
+
+body{
+	overflow-x: hidden;
+}
+
+
+.w100{
+	width: 100%;
+}
+
+.w50{
+	width: 49%;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+.menut{
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
+    left: 0;
+    top: 0;
+    float: left;
+}
+
+.teste{
+    width: calc(100% - 250px);
+	position: relative;
+	left: 250px;
+	padding: 2%;
+}

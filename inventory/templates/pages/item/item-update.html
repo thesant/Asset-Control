@@ -1,0 +1,133 @@
+{%extends 'pages/base.html'%}
+{%block title%}Castro de Item{%endblock%}
+{%block content%}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Editar Registro</h6>
+    </div>
+    {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert {{ message.tags }} text-center" role="alert" {% endif %}>
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %}
+
+      {% endif %}
+    <div class="card-body">
+
+            <form class="form"  action=""method='post' autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+      
+                <div class="row mb-3">
+                  <label for="categoryL" class="col-sm-2 col-form-label">Categoria</label>
+                  
+                  <div class="col-sm-7">
+                    <select class="form-control" aria-label=".form-select-sm example" name="categoryId"  id="categoryL">
+                        
+                        
+                            <option value="{{b}}" selected>{{item.categoryId}}</option>
+                            {% for cat in category %}
+                                
+        
+                                <option value="{{cat.id}}">{{cat.name}}</option>
+        
+                            {% endfor %}
+                        
+                      </select>
+                    
+                  </div>
+
+                </div>
+
+                <div class="row mb-3">
+                  <label for="storeL" class="col-sm-2 col-form-label">Loja</label>
+                  
+                  <div class="col-sm-7">
+                    <select class="form-control" aria-label=".form-select-sm example" name="storeId"  id="storeL">
+                        
+                        
+                            <option value="{{c}}" selected>{{item.storeId}}</option>
+                            {% for st in store %}
+                                
+        
+                                <option value="{{st.id}}">{{st.name}}</option>
+        
+                            {% endfor %}
+                        
+                      </select>
+                    
+                  </div>
+
+                </div>
+      
+                <div class="row mb-3"> 
+                  <label for="nameL" class="col-sm-2 col-form-label">Nome</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" name="name" id="nameL" value="{{item.name}}">
+                  </div>
+                </div>
+      
+                <div class="row mb-3">
+                  <label for="brandL" class="col-sm-2 col-form-label">Marca</label>
+                  <div class="col-sm-7">
+                    <input type="text" class="form-control" name="brand" id="brandL"value="{{item.brand}}">
+                  </div>
+              </div>
+      
+                <div class="row mb-3">
+                    <label for="modelL" class="col-sm-2 col-form-label">Modelo</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" name="model" id="modelL" value="{{item.model}}">
+                    </div>
+                </div>
+            
+                    
+                <div class="row mb-3">
+                    <label for="patrimonyL" class="col-sm-2 col-form-label">Patrimonio</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" name="patrimony "id="patrimonyL" value="{{item.patrimony}}">
+                    </div>
+                </div>
+
+                <div class="row mb-3">          
+                    <label for="id_obs" class="col-sm-2 col-form-label">Obs</label>
+                    <div class="col-sm-7">
+                        <textarea name="obs" cols="40" rows="10" class="form-control" maxlength="255" required id="id_obs" >{{item.obs}}</textarea>
+                    </div>
+                </div>
+               
+                <button type="submit" class="btn btn-success">Salvar</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Excluir Registro
+                </button>
+      
+      
+                
+              </form>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmar Exclusão</h5>
+      </div>
+      <div class="modal-body">
+        <span>Exluir Registro item: <b>{{item.name}}</b></span>              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <a href="{%url  'inventory:item_delete'  item.id %}"type="button" class="btn btn-danger">Confirmar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%} 
